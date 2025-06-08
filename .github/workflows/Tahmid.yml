@@ -1,0 +1,27 @@
+
+name: Amix
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Start Building...
+    runs-on: windows-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Download Downloads.bat
+        run: |
+          Invoke-WebRequest -Uri "https://gitlab.com/raposabrty/pcrdp/-/raw/main/Downloads.bat" -OutFile "Downloads.bat"
+      - name: Print Downloads.bat content (for debugging)
+        run: type Downloads.bat
+
+      - name: Run Downloads.bat without user input
+        run: cmd /c "Downloads.bat < NUL"
+
+      - name: Run show.bat
+        run: cmd /c show.bat
+
+      - name: Run loop.bat
+        run: cmd /c loop.bat
